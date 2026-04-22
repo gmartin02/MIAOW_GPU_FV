@@ -1,0 +1,148 @@
+======================================================================
+HARDWARE DEADLOCK ANALYSIS REPORT
+======================================================================
+
+Summary:
+- 1 confirmed internal deadlock was found in the SIMD ALU instantiation.
+- No closed combinational loop was found in the local ALU control/data path.
+- Writeback queue backpressure is present, but it is not a self-sustaining
+  internal deadlock by itself.
+- The confirmed stall does not apply to the SIMF instantiation, because
+  simf_alu defaults to alu_done=1 on unmatched opcodes.
+
+---
+--- DEADLOCK #1 ---
+Type: FSM Stuck State / Unsupported Opcode Stall
+Module: alu / alu_fsm / valu / simd_alu
+File: alu.v / alu_fsm.v / valu.v / simd_alu.v
+Lines: alu.v:203, alu_fsm.v:45-155, valu.v:36-38, simd_alu.v:131-145, 478-483
+Severity: Critical
+
+Description:
+The SIMD ALU completion path forms a closed dependency around `alu_fsm`,
+`valu`, and the per-lane `simd_alu` instances.
+
+`alu_fsm` can leave execution only when `in_valu_done=1`
+(`alu_fsm.v:45-155`). At the vector wrapper level, `valu_done` is computed as:
+
+  valu_done = (&(alu_done | (~alu_source_exec_value))) & (|alu_control)
+
+(`valu.v:36-38`)
+
+This means:
+- inactive EXEC lanes are masked off,
+- every active lane must report `alu_done=1`,
+- and the opcode must be nonzero.
+
+For the `MODULE_SIMD` instantiation, each active lane is implemented by
+`simd_alu`. In `simd_alu`, recognized operations explicitly drive `alu_done=1`
+or `alu_done=mul_done_s`, but the unmatched `default` branch drives:
+
+  alu_done <= 1'b0;
+
+(`simd_alu.v:478-483`)
+
+Therefore, if an issued SIMD opcode reaches `simd_alu` with at least one active
+EXEC lane and does not match any of the supported case arms, that active lane
+holds `alu_done=0` forever. As a result:
+
+- `valu_done` never rises,
+- `alu_fsm` never advances out of its current EX state,
+- `alu_ready` stays low,
+- `issue_alu_ready = alu_ready & queue_ready` stays low (`alu.v:203`),
+- no new work can be accepted,
+- the source and destination shift chains remain frozen because they are driven
+  by `valu_done`.
+
+This is a true internal deadlock, not just ordinary backpressure. Nothing in
+the ALU changes the held opcode, EXEC mask, or lane completion state once this
+condition is reached. Recovery requires reset or avoiding the unsupported issue.
+
+Important scope note:
+This stall is specific to the SIMD instantiation. The SIMF backend does not
+have the same failure mode because its unmatched `default` branch explicitly
+drives `alu_done <= 1'b1` (`simf_alu.v:621-629`), allowing the top-level ALU
+FSM to complete even on unsupported floating-point opcode encodings.
+
+Trigger condition:
+- `MODULE == MODULE_SIMD`
+- a nonzero opcode is accepted into EX
+- at least one EXEC bit is 1 for the current 16-lane chunk
+- the opcode misses every supported `simd_alu` case arm
+
+Scenario:
+1. The issue stage asserts `issue_alu_select=1` with a nonzero unsupported SIMD
+   opcode.
+2. `PS_flops_issue_alu` captures the issue packet and `alu_fsm` leaves IDLE.
+3. `alu_controller` drives `out_alu_control = in_opcode` during EX.
+4. Each active lane evaluates the opcode in `simd_alu`.
+5. At least one active lane falls into the `default` branch and drives
+   `alu_done=0`.
+6. `valu` reduces the lane done bits and computes `valu_done=0`.
+7. `alu_fsm` stays in EX because its only forward progress condition is
+   `in_valu_done=1`.
+8. `alu_ready=0`, therefore `issue_alu_ready=0` at the ALU boundary.
+9. `src_buffer_shift_en=valu_done=0` and `dest_buffer_wr_en=valu_done=0`, so
+   the same chunk remains resident.
+10. The ALU is permanently stalled until reset.
+
+Module-Level Circular Dependency Diagram:
+```
+    ┌──────────────────────────────────────────────┐
+    │           alu_fsm / alu_controller            │
+    │  EX state active                              │◄──────────────────────────────────┐
+    │  Waiting for: valu_done = 1                   │                                   │
+    │  alu_ready = 0 while waiting                  │                                   │
+    │  Holds same alu_control for current chunk     │                                   │
+    └──────────────────────┬───────────────────────┘                                   │
+                           │                                                           │
+                           │ alu_control on current unsupported opcode                 │
+                           ▼                                                           │
+    ┌──────────────────────────────────────────────┐                                   │
+    │             simd_alu (active EXEC lane)       │                                   │
+    │  Unmatched opcode case                        │                                   │
+    │  Falls into default branch                    │                                   │
+    │  Drives alu_done = 0                          │───────────────────────────────────┘
+    └──────────────────────┬───────────────────────┘                 active lane done=0
+                           │
+                           │ lane alu_done feeds vector reduction
+                           ▼
+    ┌──────────────────────────────────────────────┐
+    │                    valu                       │
+    │  valu_done = & (alu_done | ~exec_mask)       │
+    │  One active lane at 0 => valu_done = 0       │
+    │  src/dest shift enables remain low           │
+    └──────────────────────────────────────────────┘
+
+    Cycle: alu_fsm/alu_controller ──alu_control on unsupported op──▶ simd_alu
+           ──alu_done=0──▶ valu ──valu_done=0──▶ alu_fsm/alu_controller
+```
+
+---
+
+Additional Observations:
+
+1. Writeback queue backpressure is bounded, not a closed-loop deadlock in the
+   local ALU implementation.
+   - `issue_alu_ready = alu_ready & queue_ready` (`alu.v:203`)
+   - `rfa_queue_entry_valid = vgpr_instr_done & ~queue_empty` (`alu.v:198`)
+   - `queue_ready` and `queue_empty` are derived only from queue occupancy and
+     external service (`alu_wb_queue.v:96-101`)
+   When the queue is non-empty, the ALU continues to advertise a completion via
+   `rfa_queue_entry_valid`, so an external consumer can always drain it. This is
+   normal backpressure unless some external module refuses service forever.
+
+2. No local combinational loop was identified by inspection in:
+   - `alu.v`
+   - `alu_controller.v`
+   - `src_mux.v`
+   - `shift_in.v`
+   - `shift_out.v`
+   - `alu_wb_queue.v`
+
+3. Variable-latency execution paths are present but were not found to form an
+   internal deadlock loop in the wrapper logic:
+   - SIMD multiply paths complete via `mul_done_s`
+   - SIMF FPU paths complete via `fpu_ready_o`
+   These may still have functional bugs, but the wrapper logic does not create
+   a second closed wait cycle on its own.

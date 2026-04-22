@@ -1,0 +1,274 @@
+# ----------------------------------------
+# Jasper Version Info
+# tool      : Jasper 2023.09
+# platform  : Linux 4.18.0-553.104.1.el8_10.x86_64
+# version   : 2023.09 FCS 64 bits
+# build date: 2023.09.27 19:40:18 UTC
+# ----------------------------------------
+# started   : 2026-04-22 18:19:15 EDT
+# hostname  : net1580.(none)
+# pid       : 3970898
+# arguments : '-label' 'session_0' '-console' '//127.0.0.1:45981' '-style' 'windows' '-data' 'AAABDniclY/RCgFBGIW/IbfyHIqklLQXbtyRUC5tYrfUtCuzUm54VG8yTr+2uHT+5pzTzOlMvwOSR4wRQ/Mu6jBnwZqZeMlWCjtGDBkzYIrnxIGMgiDuywfxVZpLM47ykz/zBvf6KInjG271/FFo1cE60tBpc1FToc5K3V43XXrs5TwlN1J7DeKzplS6st9TbbmxljfwYiVa' '-proj' '/home/net/ga100270/AMD/MIAOW_GPU/formal_cu_top/jgproject/sessionLogs/session_0' '-init' '-hidden' '/home/net/ga100270/AMD/MIAOW_GPU/formal_cu_top/jgproject/.tmp/.initCmds.tcl' 'run.tcl'
+
+Any disclosure about the Cadence Design Systems software or its use
+model to any third party violates the written Non-Disclosure Agreement
+between Cadence Design Systems, Inc. and the customer.
+
+THIS SOFTWARE CONTAINS CONFIDENTIAL INFORMATION AND TRADE SECRETS OF
+CADENCE DESIGN SYSTEMS, INC. USE, DISCLOSURE, OR REPRODUCTION IS
+PROHIBITED WITHOUT THE PRIOR EXPRESS WRITTEN PERMISSION OF CADENCE
+DESIGN SYSTEMS, INC.
+
+Copyright (C) 2000-2023 Cadence Design Systems, Inc. All Rights
+Reserved.  Unpublished -- rights reserved under the copyright laws of
+the United States.
+
+This product includes software developed by others and redistributed
+according to license agreement. See doc/third_party_readme.txt for
+further details.
+
+RESTRICTED RIGHTS LEGEND
+
+Use, duplication, or disclosure by the Government is subject to
+restrictions as set forth in subparagraph (c) (1) (ii) of the Rights in
+Technical Data and Computer Software clause at DFARS 252.227-7013 or
+subparagraphs (c) (1) and (2) of Commercial Computer Software -- Restricted
+Rights at 48 CFR 52.227-19, as applicable.
+
+
+                          Cadence Design Systems, Inc.
+                          2655 Seely Avenue
+                          San Jose, CA 95134
+                          Phone: 408.943.1234
+
+For technical assistance visit http://support.cadence.com.
+
+Jasper Apps Analysis Session - /home/net/ga100270/AMD/MIAOW_GPU/formal_cu_top/jgproject/sessionLogs/session_0
+
+INFO: successfully checked out licenses "jasper_interactive" and "jasper_fao".
+INFO: reading configuration file "/home/net/ga100270/.config/cadence/jasper.conf".
+% clear -all
+INFO (IPF121): Cleared environment completely for new design analysis.
+% analyze -sv12 -f filelist.f
+INFO (INL011): Processing "-f" file "/home/net/ga100270/AMD/MIAOW_GPU/formal_cu_top/filelist.f".
+[-- (VERI-1482)] Analyzing Verilog file '/home/net/cadence/installs/jasper_2023.09/lib/verilog/packages/std/std.sv' into library 'std'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/alu_definitions.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/alu_controller.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/alu_fsm.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/alu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/alu_wb_queue.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/dest_shift_reg.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/mux_2_to_1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/PS_flops_EX_WB_alu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/PS_flops_issue_alu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/shift_in.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/shift_out.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/src_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/src_shift_reg.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/alu/build/valu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/adder1bit.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/adder_param.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/circular_barrel_shift.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/decoder_10_to_1024.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/decoder_6b_40b_en.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/decoder_6_to_40.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/decoder_9_to_512.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/decoder_param_en.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/decoder_param.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/dff_en.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/dff_set_en_rst.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/dff_set_en.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/dff_set.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/dff.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/encoder_5b_3b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/encoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/flop_32b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/flop_en.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/flop.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/global_definitions.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/issue_definitions.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/mux2_1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/mux_40x64b_to_1x64b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/mux_40xX_to_1xX.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/mux_param.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/nand2.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/not1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/priority_encoder_40to6.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/queue_param_1r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/reg_32b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/reg_40b_set.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/reg_40b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/reg_40xX_1r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/reg_40xX_2r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/reg_64b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/regfile.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/register.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/common/build/reg_param.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/compute_unit/build/compute_unit.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/decode/build/decode_core.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/decode/build/decode_definitions.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/decode/build/decode.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/decode/build/flag_generator.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/decode/build/instr_collate.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/decode/build/PS_flops_wavepool_decode.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/decode/build/reg_field_encoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/allocator.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/cam_allocator.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/cu_handler.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/dis_controller.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/dispatcher.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/gds_resource_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/global_resource_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/gpu_interface.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/inflight_wg_buffer.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/ram_2_port.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/resource_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/resource_update_buffer.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/dispatcher/build/wg_resource_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/exec/build/exec.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/exec/build/rd_port_9_to_1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/exec/build/reg_40xX_1r_2w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/exec/build/reg_40xX_2r_2w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/exec/build/reg_40xX_2r_3w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/exec/build/wr_port_40x64b_8_to_1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/adder6bit.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/adder7bit.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/adder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/add_wraparound_after40.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/decoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/dff_clr.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/dff_en_fixed_reset_value.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/fetch_controller.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/fetch.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/incr_wraparound_at40.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/mask_gen.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/mux4to1_6bit.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/pc_block.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/regblock.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/regfile_clr.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/round_robin.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/vacant_mask_gen.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/wavegrp_info.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/fetch/build/wfid_generator.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/instr_buffer/build/instr_buffer.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/alu_issue_logic.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/arbiter.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/barrier_wait.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/branch_wait.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/busy_gpr_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/circular_barrel_shift_5b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/finished_wf.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/functional_unit_reg_bank.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/functional_unit_reg.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/gpr_dependency_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/inflight_instr_counter.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/instr_info_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/instruction_arbiter.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/issue_flow_control.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/issue.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/mem_wait.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/mux_40xPARAMb_to_1xPARAMb.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/ready_bits_demux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/scoreboard.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/sgpr_busy_table_decoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/sgpr_busy_table_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/sgpr_comparator.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/spr_dependency_table.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/valid_entry.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/vgpr_busy_table_decoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/vgpr_busy_table_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/issue/build/vgpr_comparator.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/lsu/build/ds_addr_calc.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/lsu/build/lsu_addr_calculator.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/lsu/build/lsu_definitions.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/lsu/build/lsu_opcode_decoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/lsu/build/lsu_op_manager.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/lsu/build/lsu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/lsu/build/mtbuf_addr_calc.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/memory/build/memory.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/rfa/build/circular_shift.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/rfa/build/priority_encoder_16_to_4.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/rfa/build/rfa.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/salu/build/salu_controller.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/salu/build/salu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/salu/build/scalar_alu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/mux_128x32b_to_1x32b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/reg_128x32b_3r_2w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/reg_128x32b_3r_3w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/reg_512x32b_3r_2w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/reg_512x32b_3r_3w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/sgpr_3to1_rd_port_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/sgpr_simxlsu_wr_port_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/sgpr_simx_rd_port_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/sgpr_simx_wr_port_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/sgpr/build/sgpr.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simd/build/amultp2_32x32.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simd/build/simd_alu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simd/build/simd_instr_decoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simd/build/simd.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_addsub.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_arith.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_div.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_intfloat_conv_except.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_intfloat_conv.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_mul.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_post_norm_addsub.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_post_norm_div.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_post_norm_intfloat_conv.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_post_norm_mul.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_pre_norm_addsub.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_pre_norm_div.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/fpu_pre_norm_mul.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/simf_alu.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/simf_instr_decoder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/simf/build/simf.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/mux_256x32b_to_1x32b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/rd_port_mux_8to1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/reg_1024x32b_3r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/reg_1024x32b_3r_2w_banked.v'
+[INFO (VERI-2561)] ../flat_rtl/vgpr/build/reg_1024x32b_3r_2w_banked.v(307): undeclared symbol 'RE', assumed default net type 'wire'
+[INFO (VERI-2561)] ../flat_rtl/vgpr/build/reg_1024x32b_3r_2w_banked.v(308): undeclared symbol 'WE', assumed default net type 'wire'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/reg_1024x32b_3r_2w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/reg_256x32b_3r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/reg_256x32b_3r_2w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/reg_64page_1024x32b_3r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/reg_64page_1024x32b_3r_2w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/vgpr_2to1_rd_port_mux.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/vgpr.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/wfid_mux_8to1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/wfid_mux_9to1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/wr_port_mux_8to1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/vgpr/build/wr_port_mux_9to1.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/adder3bit.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/decoder_3_to_8.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/mux_40x35b_to_1x35b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/mux_8x64b_to_1x64b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/PS_flops_fetch_wavepool.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/queue_controller.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/reg_35b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/reg_3b.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/reg_40x35b_1r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/reg_8x64b_1r_1w.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/scbd_feeder.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/wavepool_controller.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/wavepool.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/wave_queue.v'
+[-- (VERI-1482)] Analyzing Verilog file '../flat_rtl/wavepool/build/wq_pool.v'
+% analyze -sv12 cu_props.sv
+[-- (VERI-1482)] Analyzing Verilog file 'cu_props.sv'
+[ERROR (VERI-9011)] cu_props.sv(467): block id 'AST_TRACK_SIMD0_EVENTUALLY_DONE' is already declared
+[INFO (VERI-1967)] cu_props.sv(466): previous declaration of 'AST_TRACK_SIMD0_EVENTUALLY_DONE' is from here
+[ERROR (VERI-1072)] cu_props.sv(623): module 'cu_props' is ignored due to previous errors
+Summary of errors detected:
+	[ERROR (VERI-9011)] cu_props.sv(467): block id 'AST_TRACK_SIMD0_EVENTUALLY_DONE' is already declared
+	[ERROR (VERI-1072)] cu_props.sv(623): module 'cu_props' is ignored due to previous errors
+ERROR (ENL034): 2 errors detected in the design file(s).
+
+ERROR: problem encountered at line 3 in file run.tcl
+
+INFO (IIM002): *** Stopping all proof jobs ***
+INFO (IPL005): Received request to exit from the console.
+INFO (IPL014): Waiting for the Tcl-thread to exit.
+INFO (IPL018): The peak resident set memory use for this session was 0.412 GB.
+INFO (IPL015): The Tcl-thread exited with status 0.
+INFO (IPL016): Exiting the analysis session with status 0.

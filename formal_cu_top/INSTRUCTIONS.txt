@@ -1,0 +1,3 @@
+# Instructions for saving and restoring proofs
+save -jdb miaow_db.jdb -capture_setup -capture_session_data
+restore -jdb miaow_db.jdb

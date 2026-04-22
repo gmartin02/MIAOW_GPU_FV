@@ -1,0 +1,66 @@
+2026-04-17 13:59:12.298421 (319481) main____ INFO    ----------------------------------------
+2026-04-17 13:59:12.298479 (319481) main____ INFO    Jasper version info
+2026-04-17 13:59:12.298488 (319481) main____ INFO      tool      : Jasper 2023.09
+2026-04-17 13:59:12.298495 (319481) main____ INFO      version   : 2023.09 FCS 64 bits
+2026-04-17 13:59:12.298500 (319481) main____ INFO      build date: 2023.09.27 19:40:18 UTC
+2026-04-17 13:59:12.298505 (319481) main____ INFO    ----------------------------------------
+2026-04-17 13:59:12.298509 (319481) main____ INFO    Runtime info:
+2026-04-17 13:59:12.298514 (319481) main____ INFO      platform  : Linux 4.18.0-553.104.1.el8_10.x86_64 x86_64
+2026-04-17 13:59:12.298520 (319481) main____ INFO      hostname  : net1580
+2026-04-17 13:59:12.298525 (319481) main____ INFO      pid       : 319481
+2026-04-17 13:59:12.298546 (319481) main____ INFO      arguments : '-style' 'windows' 'run.tcl' '-allow_unsupported_OS'
+2026-04-17 13:59:12.298552 (319481) main____ INFO      locale    : UTF-8
+2026-04-17 13:59:12.298556 (319481) main____ INFO    ----------------------------------------
+2026-04-17 13:59:12.298561 (319481) main____ INFO    System resource limits info:
+2026-04-17 13:59:12.298566 (319481) main____ INFO      virtual memory: unlimited
+2026-04-17 13:59:12.298571 (319481) main____ INFO      cpu time      : unlimited
+2026-04-17 13:59:12.298579 (319481) main____ INFO      processes     : 190889
+2026-04-17 13:59:12.298588 (319481) main____ INFO      stack size    : 8388608 B
+2026-04-17 13:59:12.298594 (319481) main____ INFO      core file size: 0 B
+2026-04-17 13:59:12.298599 (319481) main____ INFO      open files    : 1024
+2026-04-17 13:59:12.298604 (319481) main____ INFO      file size     : unlimited
+2026-04-17 13:59:12.298609 (319481) main____ INFO    ----------------------------------------
+2026-04-17 13:59:12.298613 (319481) main____ INFO    Memory statistics:
+2026-04-17 13:59:12.298618 (319481) main____ INFO      total physical memory  : 48929092 kB
+2026-04-17 13:59:12.298622 (319481) main____ INFO      free physical memory   : 3856688 kB
+2026-04-17 13:59:12.298627 (319481) main____ INFO      committed address space: 88043896 kB
+2026-04-17 13:59:12.298631 (319481) main____ INFO    ----------------------------------------
+2026-04-17 13:59:12.299963 (319481) main____ INFO    Important environment variables:
+2026-04-17 13:59:12.299988 (319481) main____ INFO      CDS_LIC_FILE       : '5280@license.cs.ucf.edu'
+2026-04-17 13:59:12.299998 (319481) main____ INFO      DISPLAY            : 'localhost:11.0'
+2026-04-17 13:59:12.300004 (319481) main____ INFO      JASPER_INSTALL_DIR : '/home/net/cadence/installs/jasper_2023.09'
+2026-04-17 13:59:12.300010 (319481) main____ INFO      JASPER_KERNEL_CHECK: '1'
+2026-04-17 13:59:12.300016 (319481) main____ INFO      JASPER_OS_CHECK    : '0'
+2026-04-17 13:59:12.300021 (319481) main____ INFO      LANG               : 'en_US.UTF-8'
+2026-04-17 13:59:12.300027 (319481) main____ INFO      LM_LICENSE_FILE    : '5280@license.cs.ucf.edu'
+2026-04-17 13:59:12.300032 (319481) main____ INFO    ----------------------------------------
+2026-04-17 13:59:12.301209 (319481) lic_core INFO    Initializing license system ...
+2026-04-17 13:59:12.304661 (319481) lic_core INFO    ... license system initialized.
+2026-04-17 13:59:12.307267 (319481) lic__man INFO    Claim 'main' for <ui>.
+2026-04-17 13:59:12.307291 (319481) lic_core INFO    (1) checking out 'jasper_interactive' ...
+2026-04-17 13:59:12.323578 (319481) lic_core INFO    ... (1) checkout succeeded
+2026-04-17 13:59:12.323627 (319481) lic__man INFO    Claim 'fpv' for <ui>.
+2026-04-17 13:59:12.323642 (319481) lic_core INFO    (2) checking out 'jasper_fpv' ...
+2026-04-17 13:59:12.329322 (319481) lic_core INFO    ... (2) checkout failed (error: -5) ("FLEXnet ERROR(-5, 0, 0): No such feature exists.")
+2026-04-17 13:59:12.329344 (319481) lic_core INFO    (3) checking out 'jasper_fao' ...
+2026-04-17 13:59:12.341136 (319481) lic_core INFO    ... (3) checkout succeeded
+2026-04-17 13:59:12.341591 (319481) main____ INFO    Tool inactivity delay is 480000 ms.
+2026-04-17 13:59:13.038062 (319481) lic__man INFO    Claim 'fpv' for <ui>.
+2026-04-17 13:59:13.201877 (319481) lic__man INFO    Unclaim 'fpv' for <ui>.
+2026-04-17 13:59:13.201908 (319481) lic__man INFO    Claim 'fpv' for <ui>.
+2026-04-17 13:59:13.207715 (319481) session_ INFO    Starting analysis session with session id 'session_0' (launcher: <local>) ...
+2026-04-17 13:59:13.210117 (319481) session_ INFO    Analysis session with session id 'session_0' started (pid: 319617)
+2026-04-17 13:59:16.621912 (319481) session_ INFO    Analysis session 'session_0' connected to the console (host: 127.0.0.1:55320)
+2026-04-17 13:59:17.257856 (319481) main____ INFO    Releasing console memory by request of analysis session 'session_0'.
+2026-04-17 13:59:17.258685 (319481) lic__man INFO    Unclaim everything for 'session_0'.
+2026-04-17 13:59:19.915353 (319481) lic__man INFO    Unclaim everything for 'session_0'.
+2026-04-17 13:59:20.783181 (319481) lic__man INFO    Claim 'fpv' for 'session_0'.
+2026-04-17 13:59:20.783213 (319481) lic__man INFO    Claim 'fpv' for 'session_0/prove-0'.
+2026-04-17 13:59:29.275851 (319481) lic__man INFO    Unclaim everything for 'session_0/prove-0'.
+2026-04-17 14:02:06.702625 (319652) main____ INFO    SIGINT received (#1). Trying to interrupt current computation(s).
+2026-04-17 14:02:06.870382 (319652) main____ INFO    SIGINT received (#2). Trying to save and exit.
+2026-04-17 14:02:06.909901 (319481) main____ INFO    The database has been auto-saved to '/home/net/ga100270/AMD/MIAOW_GPU/formal/jgproject/autosave_sJGzxD.db'.
+2026-04-17 14:02:07.043989 (319481) session_ INFO    Analysis session 'session_0' disconnected.
+2026-04-17 14:02:07.061008 (319481) lic_core INFO    (1) checkin jasper_interactive
+2026-04-17 14:02:07.062309 (319481) lic_core INFO    (3) checkin jasper_fao
+2026-04-17 14:02:07.063448 (319481) main____ INFO    Exiting with status 0.

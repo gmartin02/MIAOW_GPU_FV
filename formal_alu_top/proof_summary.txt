@@ -1,0 +1,100 @@
+
+==============================================================
+    Jasper Verification Results
+==============================================================
+    2023.09 FCS 64 bits for Linux64 3.10.0-1160.21.1.el7.x86_64
+    Host Name: net1580.net.ucf.edu
+    User Name: no547576
+    Printed on: Thursday, Apr16, 2026 02:09:07 PM EDT
+    Working Directory: /home/net/no547576/amd/deadlock_alu/scripts
+
+
+==============================================================
+SUMMARY
+==============================================================
+    Total Tasks           : 1
+    Total Properties      : 56
+          assumptions     : 0                   
+           - approved     : 0                   
+           - temporary    : 0                   
+          assertions      : 19                  
+           - proven       : 16                  ( 84.2% )
+           - marked_proven: 0                   ( 0.0% )
+           - cex          : 3                   ( 15.8% )
+           - ar_cex       : 0                   ( 0.0% )
+           - undetermined : 0                   ( 0.0% )
+           - unprocessed  : 0                   ( 0.0% )
+           - error        : 0                   ( 0.0% )
+          covers          : 37                  
+           - unreachable  : 0                   ( 0.0% )
+           - covered      : 37                  ( 100.0% )
+           - ar_covered   : 0                   ( 0.0% )
+           - undetermined : 0                   ( 0.0% )
+           - unprocessed  : 0                   ( 0.0% )
+           - error        : 0                   ( 0.0% )
+
+==============================================================
+RESULTS
+==============================================================
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+       Name                                                                                           |    Result    |  Engine  |  Bound  |  Time    
+-------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---[ <embedded> ]--------------------------------------------------------------------------------------------------------------------------------------
+[1]   alu.valu.genblk1.simd_alu[15].deadlock_assertions_simd_lane_bind_i._assert_1                         proven          Hp     Infinite    0.005 s      
+[2]   alu.valu.genblk1.simd_alu[15].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1           covered         N             3    0.083 s      
+[3]   alu.valu.genblk1.simd_alu[15].deadlock_assertions_simd_lane_bind_i._cover_2                          covered         N             7    0.001 s      
+[4]   alu.valu.genblk1.simd_alu[14].deadlock_assertions_simd_lane_bind_i._assert_1                         proven          Hp     Infinite    0.005 s      
+[5]   alu.valu.genblk1.simd_alu[14].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1           covered         N             3    0.001 s      
+[6]   alu.valu.genblk1.simd_alu[14].deadlock_assertions_simd_lane_bind_i._cover_2                          covered         N             7    0.007 s      
+[7]   alu.valu.genblk1.simd_alu[13].deadlock_assertions_simd_lane_bind_i._assert_1                         proven          Hp     Infinite    0.006 s      
+[8]   alu.valu.genblk1.simd_alu[13].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1           covered         Bm            3    0.002 s      
+[9]   alu.valu.genblk1.simd_alu[13].deadlock_assertions_simd_lane_bind_i._cover_2                          covered         Bm            7    0.034 s      
+[10]  alu.valu.genblk1.simd_alu[12].deadlock_assertions_simd_lane_bind_i._assert_1                         proven          Hp     Infinite    0.006 s      
+[11]  alu.valu.genblk1.simd_alu[12].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1           covered         Bm            3    0.003 s      
+[12]  alu.valu.genblk1.simd_alu[12].deadlock_assertions_simd_lane_bind_i._cover_2                          covered         Bm            7    0.036 s      
+[13]  alu.valu.genblk1.simd_alu[11].deadlock_assertions_simd_lane_bind_i._assert_1                         proven          Hp     Infinite    0.006 s      
+[14]  alu.valu.genblk1.simd_alu[11].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1           covered         Bm            3    0.005 s      
+[15]  alu.valu.genblk1.simd_alu[11].deadlock_assertions_simd_lane_bind_i._cover_2                          covered         Bm            7    0.039 s      
+[16]  alu.valu.genblk1.simd_alu[10].deadlock_assertions_simd_lane_bind_i._assert_1                         proven          Hp     Infinite    0.006 s      
+[17]  alu.valu.genblk1.simd_alu[10].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1           covered         Bm            3    0.009 s      
+[18]  alu.valu.genblk1.simd_alu[10].deadlock_assertions_simd_lane_bind_i._cover_2                          covered         Bm            7    0.041 s      
+[19]  alu.valu.genblk1.simd_alu[9].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.006 s      
+[20]  alu.valu.genblk1.simd_alu[9].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.010 s      
+[21]  alu.valu.genblk1.simd_alu[9].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.042 s      
+[22]  alu.valu.genblk1.simd_alu[8].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.007 s      
+[23]  alu.valu.genblk1.simd_alu[8].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.012 s      
+[24]  alu.valu.genblk1.simd_alu[8].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.045 s      
+[25]  alu.valu.genblk1.simd_alu[7].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.007 s      
+[26]  alu.valu.genblk1.simd_alu[7].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.013 s      
+[27]  alu.valu.genblk1.simd_alu[7].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.046 s      
+[28]  alu.valu.genblk1.simd_alu[6].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.007 s      
+[29]  alu.valu.genblk1.simd_alu[6].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.018 s      
+[30]  alu.valu.genblk1.simd_alu[6].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.048 s      
+[31]  alu.valu.genblk1.simd_alu[5].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.007 s      
+[32]  alu.valu.genblk1.simd_alu[5].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         N             3    0.001 s      
+[33]  alu.valu.genblk1.simd_alu[5].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.052 s      
+[34]  alu.valu.genblk1.simd_alu[4].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.007 s      
+[35]  alu.valu.genblk1.simd_alu[4].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.019 s      
+[36]  alu.valu.genblk1.simd_alu[4].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.053 s      
+[37]  alu.valu.genblk1.simd_alu[3].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.008 s      
+[38]  alu.valu.genblk1.simd_alu[3].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.021 s      
+[39]  alu.valu.genblk1.simd_alu[3].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.055 s      
+[40]  alu.valu.genblk1.simd_alu[2].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.008 s      
+[41]  alu.valu.genblk1.simd_alu[2].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.022 s      
+[42]  alu.valu.genblk1.simd_alu[2].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.056 s      
+[43]  alu.valu.genblk1.simd_alu[1].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.008 s      
+[44]  alu.valu.genblk1.simd_alu[1].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         N             3    0.001 s      
+[45]  alu.valu.genblk1.simd_alu[1].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.058 s      
+[46]  alu.valu.genblk1.simd_alu[0].deadlock_assertions_simd_lane_bind_i._assert_1                          proven          Hp     Infinite    0.008 s      
+[47]  alu.valu.genblk1.simd_alu[0].deadlock_assertions_simd_lane_bind_i._assert_1:precondition1            covered         Bm            3    0.024 s      
+[48]  alu.valu.genblk1.simd_alu[0].deadlock_assertions_simd_lane_bind_i._cover_2                           covered         Bm            7    0.062 s      
+[49]  alu.deadlock_assertions_alu_bind_i._assert_1                                                         cex             Ht           15    0.003 s      
+[50]  alu.deadlock_assertions_alu_bind_i._assert_1:precondition1                                           covered         N             3    0.083 s      
+[51]  alu.deadlock_assertions_alu_bind_i._assert_2                                                         cex             Bm            4    0.030 s      
+[52]  alu.deadlock_assertions_alu_bind_i._assert_2:precondition1                                           covered         N             3    0.083 s      
+[53]  alu.deadlock_assertions_alu_bind_i._assert_3                                                         cex             Ht           15    0.026 s      
+[54]  alu.deadlock_assertions_alu_bind_i._assert_3:precondition1                                           covered         Bm            3    0.028 s      
+[55]  alu.deadlock_assertions_alu_bind_i._cover_4                                                          covered         Ht           11    0.001 s      
+[56]  alu.deadlock_assertions_alu_bind_i._cover_5                                                          covered         Bm            5    0.032 s      
