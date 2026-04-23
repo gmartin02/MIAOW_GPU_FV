@@ -93,7 +93,12 @@ module cu_props #(
     input  logic                  lsu2vgpr_instr_done,
     input  logic [WFID_W-1:0]     lsu2vgpr_instr_done_wfid,
     input  logic [VGPR_AW-1:0]    lsu2vgpr_dest_addr,
-    input  logic [PC_W-1:0]       lsu2tracemon_retire_pc
+    input  logic [PC_W-1:0]       lsu2tracemon_retire_pc,
+
+    // SALU branch outcome signals
+    input  logic                  salu2fetchwaveissue_branch_en,
+    input  logic                  salu2fetchwaveissue_branch_taken,
+    input  logic [WFID_W-1:0]     salu2fetchwaveissue_branch_wfid
 );
 
     default clocking @(posedge clk); endclocking
@@ -149,7 +154,7 @@ module cu_props #(
                        (wave2decode_wfid     == ndc_wfid) &&
                        (wave2decode_instr_pc == ndc_pc);
 
-    wire decode_match = decode2issue_valid &&
+    wire decode_match = track_live && decode2issue_valid &&
                         (decode2issue_wfid     == track_wfid) &&
                         (decode2issue_instr_pc == track_pc);
 
@@ -270,6 +275,12 @@ module cu_props #(
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= lsu2vgpr_dest_addr;
+                end else if (salu2fetchwaveissue_branch_en &&
+                    (salu2fetchwaveissue_branch_wfid == track_wfid) &&
+                    track_issued_salu) begin
+                    track_completed  <= 1'b1;
+                    // branches don't write a destination register so neither
+                    // track_has_sgpr_dest nor track_has_vgpr_dest is set
                 end
             end
         end
@@ -288,55 +299,92 @@ module cu_props #(
             track_issued_simf3  <= 1'b0;
             track_issued_lsu    <= 1'b0;
             track_issued_pc     <= '0;
-        end else if (!track_decoded) begin
+        end else if (track_decoded) begin
             if (!(track_issued_salu || track_issued_simd0 || track_issued_simd1 ||
                   track_issued_simd2 || track_issued_simd3 || track_issued_simf0 ||
                   track_issued_simf1 || track_issued_simf2 || track_issued_simf3 ||
                   track_issued_lsu)) begin
             	// Match on ndc_wfid directly — no track_live dependency.
-            	if (issue2salu_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_salu <= 1'b1;
-                	track_issued_pc   <= issue2alu_instr_pc;
-            	end
-            	if (issue2simd0_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simd0 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2simd1_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simd1 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2simd2_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simd2 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2simd3_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simd3 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2simf0_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simf0 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2simf1_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simf1 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2simf2_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simf2 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2simf3_alu_select && (issue2alu_wfid == ndc_wfid)) begin
-                	track_issued_simf3 <= 1'b1;
-                	track_issued_pc    <= issue2alu_instr_pc;
-            	end
-            	if (issue2lsu_lsu_select && (issue2lsu_wfid == ndc_wfid)) begin
-                	track_issued_lsu <= 1'b1;
-                	track_issued_pc  <= issue2lsu_instr_pc;
-            	end
+                if (issue2salu_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_salu <= 1'b1;
+                        track_issued_pc   <= issue2alu_instr_pc;
+                end
+                if (issue2simd0_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simd0 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2simd1_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simd1 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2simd2_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simd2 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2simd3_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simd3 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2simf0_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simf0 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2simf1_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simf1 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2simf2_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simf2 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2simf3_alu_select && 
+                    (issue2alu_wfid == track_wfid) &&
+                    (issue2alu_instr_pc == track_pc)) begin
+                        track_issued_simf3 <= 1'b1;
+                        track_issued_pc    <= issue2alu_instr_pc;
+                end
+                if (issue2lsu_lsu_select && 
+                    (issue2lsu_wfid == track_wfid) &&
+                    (issue2lsu_instr_pc == track_pc)) begin
+                        track_issued_lsu <= 1'b1;
+                        track_issued_pc  <= issue2lsu_instr_pc;
+                end
 	    end
         end
     end
+
+    logic track_was_branch;
+    logic track_branch_taken;
+
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            track_was_branch   <= 1'b0;
+            track_branch_taken <= 1'b0;
+        end else if (track_issued_salu &&
+                     salu2fetchwaveissue_branch_en &&
+                     (salu2fetchwaveissue_branch_wfid == track_wfid) &&
+                     !track_was_branch) begin
+            track_was_branch   <= 1'b1;
+            track_branch_taken <= salu2fetchwaveissue_branch_taken;
+        end
+    end
+    
     // ------------------------------------------------------------------------
     // Location / stage observation wires for easy waveform browsing
     // ------------------------------------------------------------------------
@@ -347,23 +395,50 @@ module cu_props #(
                           (decode2issue_wfid     == track_wfid) &&
                           (decode2issue_instr_pc == track_pc);
 
-    wire at_issue_salu  = track_live && issue2salu_alu_select  && (issue2alu_wfid == track_wfid);
-    wire at_issue_simd0 = track_live && issue2simd0_alu_select && (issue2alu_wfid == track_wfid);
-    wire at_issue_simd1 = track_live && issue2simd1_alu_select && (issue2alu_wfid == track_wfid);
-    wire at_issue_simd2 = track_live && issue2simd2_alu_select && (issue2alu_wfid == track_wfid);
-    wire at_issue_simd3 = track_live && issue2simd3_alu_select && (issue2alu_wfid == track_wfid);
+    wire at_issue_salu  = track_decoded && issue2salu_alu_select  &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
 
-    wire at_issue_simf0 = track_live && issue2simf0_alu_select && (issue2alu_wfid == track_wfid);
-    wire at_issue_simf1 = track_live && issue2simf1_alu_select && (issue2alu_wfid == track_wfid);
-    wire at_issue_simf2 = track_live && issue2simf2_alu_select && (issue2alu_wfid == track_wfid);
-    wire at_issue_simf3 = track_live && issue2simf3_alu_select && (issue2alu_wfid == track_wfid);
+    wire at_issue_simd0 = track_decoded && issue2simd0_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
 
-    wire at_issue_lsu   = track_live && issue2lsu_lsu_select   && (issue2lsu_wfid == track_wfid);
+    wire at_issue_simd1 = track_decoded && issue2simd1_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
+
+    wire at_issue_simd2 = track_decoded && issue2simd2_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
+
+    wire at_issue_simd3 = track_decoded && issue2simd3_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
+
+    wire at_issue_simf0 = track_decoded && issue2simf0_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
+
+    wire at_issue_simf1 = track_decoded && issue2simf1_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
+
+    wire at_issue_simf2 = track_decoded && issue2simf2_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
+
+    wire at_issue_simf3 = track_decoded && issue2simf3_alu_select &&
+                          (issue2alu_wfid    == track_wfid) &&
+                          (issue2alu_instr_pc == track_pc);
+
+    wire at_issue_lsu   = track_decoded && issue2lsu_lsu_select   &&
+                          (issue2lsu_wfid    == track_wfid) &&
+                          (issue2lsu_instr_pc == track_pc);
 
     wire done_salu = salu2sgpr_instr_done &&
-                     (salu2sgpr_instr_done_wfid == track_wfid) &&
-                     (salu2tracemon_retire_pc   == track_issued_pc) &&
-                     track_issued_salu;
+                      (salu2sgpr_instr_done_wfid == track_wfid) &&
+                      (salu2tracemon_retire_pc   == track_issued_pc) &&
+                      track_issued_salu;
  
     wire done_simd0 = simd0_2vgpr_instr_done &&
                       (simd0_2vgpr_instr_done_wfid == track_wfid) &&
@@ -413,10 +488,16 @@ module cu_props #(
                     done_simf0     || done_simf1 || done_simf2 || done_simf3 ||
                     done_lsu_sgpr  || done_lsu_vgpr;
 
+    wire at_salu_branch = track_issued_salu &&
+                          salu2fetchwaveissue_branch_en &&
+                          (salu2fetchwaveissue_branch_wfid == track_wfid);
+
+    wire track_salu_branch_taken     = at_salu_branch &&  salu2fetchwaveissue_branch_taken;
+    wire track_salu_branch_not_taken = at_salu_branch && !salu2fetchwaveissue_branch_taken;
+
     // ------------------------------------------------------------------------
     // Properties
     // ------------------------------------------------------------------------	
-    
     ASM_TRACK_NOT_PRELIVE: assume property (
         $rose(!rst) |-> !track_live
     );
@@ -440,6 +521,12 @@ module cu_props #(
     AST_TRACK_SIMD0_EVENTUALLY_DONE: assert property ($rose(track_issued_simd0) |-> ##[1:60] done_simd0);
     AST_TRACK_SIMF0_EVENTUALLY_DONE: assert property ($rose(track_issued_simf0) |-> ##[1:60] done_simf0);
 
+    AST_NO_ISSUE_BEFORE_DECODE: assert property (
+        (track_issued_salu || track_issued_simd0 || track_issued_simd1 || track_issued_simd2 || track_issued_simd3 ||
+         track_issued_simf0 || track_issued_simf1 || track_issued_simf2 || track_issued_simf3 || track_issued_lsu)
+        |->
+        track_decoded
+    );    
 
     AST_ISSUED_BEFORE_COMPLETED: assert property (
         $rose(track_completed) |-> 
@@ -451,36 +538,51 @@ module cu_props #(
 
     AST_TRACK_SOMEHOW_COMPLETES: assert property ($rose(track_live) |-> ##[1:100] track_completed);
  
-    AST_SALU_NOT_COMPLETED_AS_LSU: assert property (
-        (at_issue_salu && !track_issued_lsu) |-> not (##[1:40] (done_lsu_sgpr || done_lsu_vgpr)));
- 
     AST_TRACK_ID_STABLE: assert property ((track_live && $past(track_live)) |-> ($stable(track_wfid) && $stable(track_pc)));
  
     AST_TRACK_DECODED_ID_STABLE: assert property ((track_decoded && $past(track_decoded)) |-> ($stable(track_opcode) && $stable(track_fu)));
- 
-    AST_NOT_SALU_AND_LSU: assert property (track_decoded |-> !(track_issued_salu && track_issued_lsu));
- 
-    AST_NOT_SIMD_AND_SIMF: assert property (
-        track_decoded |->
-        !((track_issued_simd0 || track_issued_simd1 ||
-           track_issued_simd2 || track_issued_simd3) &&
-          (track_issued_simf0 || track_issued_simf1 ||
-           track_issued_simf2 || track_issued_simf3))
+    
+    AST_SALU_NOT_COMPLETED_AS_LSU: assert property (
+        (at_issue_salu && !track_issued_lsu) |->
+        not (##[1:40] (done_lsu_sgpr || done_lsu_vgpr))
+    );
+
+    AST_TRACK_HAS_AT_MOST_ONE_ISSUED_PATH: assert property (
+        $onehot0({
+            track_issued_salu,
+            track_issued_simd0,
+            track_issued_simd1,
+            track_issued_simd2,
+            track_issued_simd3,
+            track_issued_simf0,
+            track_issued_simf1,
+            track_issued_simf2,
+            track_issued_simf3,
+            track_issued_lsu
+        })
     );
     
-    // If the tracker recorded a SALU issue, completion must come via SALU
-    AST_SALU_ISSUED_COMPLETES_VIA_SALU: assert property (
+    AST_TRACKED_SALU_COMPLETION_IS_SGPR_OR_BRANCH: assert property (
         (track_issued_salu && $rose(track_completed)) |->
-        track_has_sgpr_dest
+        (track_has_sgpr_dest || track_was_branch)
     );
 
     // If issued to a vector FU, completion must write VGPR
-    AST_VALU_ISSUED_COMPLETES_VIA_VGPR: assert property (
+    AST_TRACKED_VALU_COMPLETION_IS_VGPR: assert property (
         ((track_issued_simd0 || track_issued_simd1 ||
           track_issued_simd2 || track_issued_simd3 ||
           track_issued_simf0 || track_issued_simf1 ||
           track_issued_simf2 || track_issued_simf3) && $rose(track_completed)) |->
         track_has_vgpr_dest
+    );
+
+    AST_TRACKED_BRANCH_COMPLETION_HAS_NO_DEST: assert property (
+        $rose(track_completed) && track_was_branch |->
+        (!track_has_sgpr_dest && !track_has_vgpr_dest)
+    );
+
+    AST_BRANCH_ONLY_FROM_SALU_PATH: assert property (
+        track_was_branch |-> track_issued_salu
     );
 
     COV_TRACK_SEEN: cover property (track_live);
@@ -512,20 +614,18 @@ module cu_props #(
         ##[1:20] (done_lsu_sgpr || done_lsu_vgpr)
     );
 
-    COV_TRACK_SIMD: cover property (
+    COV_TRACK_SIMD0: cover property (
         at_fetchdecode
         ##[1:10] at_decodeissue
-        ##[1:10] (at_issue_simd0 || at_issue_simd1 ||
-                  at_issue_simd2 || at_issue_simd3)
-        ##[1:30] (done_simd0 || done_simd1 || done_simd2 || done_simd3)
+        ##[1:10] at_issue_simd0
+        ##[1:30] done_simd0
     );
  
-    COV_TRACK_SIMF: cover property (
+    COV_TRACK_SIMF0: cover property (
         at_fetchdecode
         ##[1:10] at_decodeissue
-        ##[1:10] (at_issue_simf0 || at_issue_simf1 ||
-                  at_issue_simf2 || at_issue_simf3)
-        ##[1:30] (done_simf0 || done_simf1 || done_simf2 || done_simf3)
+        ##[1:10] at_issue_simf0
+        ##[1:30] done_simf0
     );
 
     // Completion before fetch — should be UNREACHABLE
@@ -592,6 +692,20 @@ module cu_props #(
          track_issued_simd2 || track_issued_simd3) &&
         (track_issued_simf0 || track_issued_simf1 ||
          track_issued_simf2 || track_issued_simf3)
+    );
+
+    COV_TRACK_SALU_BRANCH_TAKEN: cover property (
+        at_fetchdecode
+        ##[1:10] at_decodeissue
+        ##[1:10] at_issue_salu
+        ##[1:20] track_salu_branch_taken
+    );
+
+    COV_TRACK_SALU_BRANCH_NOT_TAKEN: cover property (
+        at_fetchdecode
+        ##[1:10] at_decodeissue
+        ##[1:10] at_issue_salu
+        ##[1:20] track_salu_branch_not_taken
     );
 
 endmodule
@@ -680,5 +794,9 @@ bind compute_unit cu_props #(
     .lsu2vgpr_instr_done(lsu2vgpr_instr_done),
     .lsu2vgpr_instr_done_wfid(lsu2vgpr_instr_done_wfid),
     .lsu2vgpr_dest_addr(lsu2vgpr_dest_addr),
-    .lsu2tracemon_retire_pc(lsu2tracemon_retire_pc)
+    .lsu2tracemon_retire_pc(lsu2tracemon_retire_pc),
+
+    .salu2fetchwaveissue_branch_en(salu2fetchwaveissue_branch_en),
+    .salu2fetchwaveissue_branch_taken(salu2fetchwaveissue_branch_taken),
+    .salu2fetchwaveissue_branch_wfid(salu2fetchwaveissue_branch_wfid)
 );
