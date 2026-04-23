@@ -1,34 +1,8 @@
-
-// miaow_cu_ndc_tracker.sv
-//
-// Lightweight instruction tracker for MIAOW compute_unit.
-//
 // Purpose:
 //   - choose one instruction instance using nondeterministic WFID + PC
 //   - latch what the instruction is (raw instruction bits, opcode, FU)
 //   - expose stage/location booleans for waveform inspection
 //   - expose completion booleans for SALU / SIMD / SIMF / LSU paths
-//
-// Notes:
-//   - This module is meant to be *bound* into compute_unit
-//   - It only uses CU-top visible signals to keep the cone smaller
-//   - The user should blackbox large storage blocks separately if needed
-//
-// Typical Jasper usage:
-//   analyze -sv miaow_cu_ndc_tracker.sv
-//   elaborate -top compute_unit -bbox_m {vgpr sgpr memory}
-//   // After elaboration:
-//   // Signals from this bind module will appear under compute_unit.<bound_instance_name>.*
-//
-// Optional follow-up in Jasper:
-//   // Assume one path only, for example SALU:
-//   // assume { !compute_unit.issue2lsu_lsu_select; }
-//   // assume { !compute_unit.issue2simd0_alu_select; }
-//   // ...
-//
-// This tracker intentionally does not assume any opcode encoding values;
-// it only latches and exposes opcode/FU so you can inspect them in traces.
-//
 
 module cu_props #(
     parameter int WFID_W   = 6,
