@@ -199,83 +199,83 @@ module cu_props #(
             // WFID match is required; retire PC match guards against other
             // instructions from the same wavefront completing concurrently.
             if (track_live && track_decoded && !track_completed) begin
-                if (salu2sgpr_instr_done &&
+                if (track_issued_salu && salu2sgpr_instr_done &&
                     (salu2sgpr_instr_done_wfid == track_wfid) &&
                     (salu2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_sgpr_dest <= 1'b1;
                     track_sgpr_dest     <= salu2sgpr_dest_addr;
  
-                end else if (simd0_2vgpr_instr_done &&
+                end else if (track_issued_simd0 && simd0_2vgpr_instr_done &&
                     (simd0_2vgpr_instr_done_wfid == track_wfid) &&
                     (simd0_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= simd0_2vgpr_dest_addr;
  
-                end else if (simd1_2vgpr_instr_done &&
+                end else if (track_issued_simd1 && simd1_2vgpr_instr_done &&
                     (simd1_2vgpr_instr_done_wfid == track_wfid) &&
                     (simd1_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= simd1_2vgpr_dest_addr;
  
-                end else if (simd2_2vgpr_instr_done &&
+                end else if (track_issued_simd2 && simd2_2vgpr_instr_done &&
                     (simd2_2vgpr_instr_done_wfid == track_wfid) &&
                     (simd2_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= simd2_2vgpr_dest_addr;
  
-                end else if (simd3_2vgpr_instr_done &&
+                end else if (track_issued_simd3 && simd3_2vgpr_instr_done &&
                     (simd3_2vgpr_instr_done_wfid == track_wfid) &&
                     (simd3_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= simd3_2vgpr_dest_addr;
  
-                end else if (simf0_2vgpr_instr_done &&
+                end else if (track_issued_simf0 && simf0_2vgpr_instr_done &&
                     (simf0_2vgpr_instr_done_wfid == track_wfid) &&
                     (simf0_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= simf0_2vgpr_dest_addr;
  
-                end else if (simf1_2vgpr_instr_done &&
+                end else if (track_issued_simf1 && simf1_2vgpr_instr_done &&
                     (simf1_2vgpr_instr_done_wfid == track_wfid) &&
                     (simf1_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= simf1_2vgpr_dest_addr;
  
-                end else if (simf2_2vgpr_instr_done &&
+                end else if (track_issued_simf2 && simf2_2vgpr_instr_done &&
                     (simf2_2vgpr_instr_done_wfid == track_wfid) &&
                     (simf2_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= simf2_2vgpr_dest_addr;
  
-                end else if (simf3_2vgpr_instr_done &&
+                end else if (track_issued_simf3 && simf3_2vgpr_instr_done &&
                     (simf3_2vgpr_instr_done_wfid == track_wfid) &&
                     (simf3_2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
-                    track_has_vgpr_dest <= 1'b1;
+                    track_has_vgpr_dest <= 1'b1; 
                     track_vgpr_dest     <= simf3_2vgpr_dest_addr;
  
-                end else if (lsu2sgpr_instr_done &&
+                end else if (track_issued_lsu && lsu2sgpr_instr_done &&
                     (lsu2sgpr_instr_done_wfid == track_wfid) &&
                     (lsu2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_sgpr_dest <= 1'b1;
                     track_sgpr_dest     <= lsu2sgpr_dest_addr;
  
-                end else if (lsu2vgpr_instr_done &&
+                end else if (track_issued_lsu && lsu2vgpr_instr_done &&
                     (lsu2vgpr_instr_done_wfid == track_wfid) &&
                     (lsu2tracemon_retire_pc   == track_issued_pc)) begin
                     track_completed     <= 1'b1;
                     track_has_vgpr_dest <= 1'b1;
                     track_vgpr_dest     <= lsu2vgpr_dest_addr;
-                end else if (salu2fetchwaveissue_branch_en &&
+                end else if (track_issued_salu && salu2fetchwaveissue_branch_en &&
                     (salu2fetchwaveissue_branch_wfid == track_wfid) &&
                     track_issued_salu) begin
                     track_completed  <= 1'b1;
